@@ -1,0 +1,27 @@
+[
+  {
+    "group": "gremlin",
+    "name": "gremlin-groovy",
+    "className": "io.shike.gremzeppelin.GremlinInterpreter",
+    "properties": {
+      "gremlin.server.hosts": {
+        "envName": null,
+        "propertyName": "gremlin.server.hosts",
+        "defaultValue": "localhost",
+        "description": "Gremlin server hosts (DNS name or IP address). Default = localhost. Ex: '192.168.0.12,node2,node3'",
+        "type": "textarea"
+      },
+      "gremlin.server.port": {
+        "envName": null,
+        "propertyName": "gremlin.server.port",
+        "defaultValue": "8182",
+        "description": "Gremlin server port. Default = 8182",
+        "type": "number"
+      }
+    },
+    "editor": {
+      "language": "groovy",
+      "editOnDblClick": false
+    }
+  }
+]
