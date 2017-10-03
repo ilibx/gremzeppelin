@@ -3,6 +3,8 @@ package io.shike.gremzeppelin;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
 
+import org.apache.commons.configuration.BaseConfiguration;
+import org.apache.commons.configuration.Configuration;
 import org.apache.tinkerpop.gremlin.driver.Client;
 import org.apache.tinkerpop.gremlin.driver.Cluster;
 import org.apache.tinkerpop.gremlin.driver.ResultSet;
@@ -12,9 +14,8 @@ import org.apache.zeppelin.interpreter.InterpreterResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.Properties;
-
-import io.vavr.control.Try;
 
 /**
  * @author Ranger Tsao(https://github.com/boliza)
@@ -24,10 +25,8 @@ public class GremlinInterpreter extends Interpreter {
     private static final Logger logger = LoggerFactory.getLogger(GremlinInterpreter.class);
 
     private static final String DEFAULT_GREMLIN_SERVER_HOSTS = "127.0.0.1";
-    private static final int DEFAULT_GREMLIN_SERVER_PORT = 8182;
 
-    private String GREMLIN_SERVER_HOSTS = "gremlin.server.hosts";
-    private String GREMLIN_SERVER_PORT = "gremlin.server.port";
+    private static final String GREMLIN_SERVER_HOSTS = "gremlin.server.hosts";
 
     private Client client;
     private Cluster cluster;
@@ -38,11 +37,15 @@ public class GremlinInterpreter extends Interpreter {
 
     @Override
     public void open() {
-        logger.info("init gremlin client via {}", property);
-        cluster = Cluster.build()
-                         .addContactPoints(property.getProperty(GREMLIN_SERVER_HOSTS, DEFAULT_GREMLIN_SERVER_HOSTS).split(","))
-                         .port(Try.of(() -> Integer.parseInt(property.getProperty(GREMLIN_SERVER_PORT))).getOrElse(DEFAULT_GREMLIN_SERVER_PORT))
-                         .create();
+        logger.info("init gremlin client via {}", properties);
+        Configuration configuration = new BaseConfiguration();
+        properties.keySet().forEach(key -> configuration.setProperty(key.toString(), properties.get(key)));
+        //transform hosts
+        String hosts = configuration.getString(GREMLIN_SERVER_HOSTS, DEFAULT_GREMLIN_SERVER_HOSTS);
+        configuration.clearProperty(GREMLIN_SERVER_HOSTS);
+        configuration.setProperty(GREMLIN_SERVER_HOSTS, Arrays.asList(hosts.split(",")));
+
+        cluster = Cluster.open(configuration);
         client = cluster.connect();
     }
 
@@ -62,6 +65,8 @@ public class GremlinInterpreter extends Interpreter {
                                      .collect(JsonArray::new, JsonArray::add, JsonArray::addAll);
 
             //TODO extract ResultSet
+            //Case MessageSerializer
+
             return new InterpreterResult(InterpreterResult.Code.SUCCESS, array.toString());
         } catch (RuntimeException e) {
             return new InterpreterResult(InterpreterResult.Code.ERROR, e.getMessage());
@@ -82,4 +87,5 @@ public class GremlinInterpreter extends Interpreter {
     public int getProgress(InterpreterContext interpreterContext) {
         return 0;
     }
+
 }

@@ -8,15 +8,190 @@
         "envName": null,
         "propertyName": "gremlin.server.hosts",
         "defaultValue": "localhost",
-        "description": "Gremlin server hosts (DNS name or IP address). Default = localhost. Ex: '192.168.0.12,node2,node3'",
+        "description": "The list of hosts that the driver will connect to. Default = localhost. Ex: '192.168.0.12,node2,node3'",
         "type": "textarea"
       },
       "gremlin.server.port": {
         "envName": null,
         "propertyName": "gremlin.server.port",
         "defaultValue": "8182",
-        "description": "Gremlin server port. Default = 8182",
+        "description": "The port of the Gremlin Server to connect to. The same port will be applied for all hosts. Default = 8182",
         "type": "number"
+      },
+      "gremlin.server.username": {
+        "envName": null,
+        "propertyName": "gremlin.server.username",
+        "defaultValue": "none",
+        "description": "The username to submit on requests that require authentication. Default = none",
+        "type": "string"
+      },
+      "gremlin.server.password": {
+        "envName": null,
+        "propertyName": "gremlin.server.password",
+        "defaultValue": "none",
+        "description": "TThe password to submit on requests that require authentication. Default = none",
+        "type": "password"
+      },
+      "gremlin.server.jaasEntry": {
+        "envName": null,
+        "propertyName": "gremlin.server.jaasEntry",
+        "defaultValue": "none",
+        "description": "Sets the AuthProperties.Property.JAAS_ENTRY properties for authentication to Gremlin Server. Default = none",
+        "type": "string"
+      },
+      "gremlin.server.protocol": {
+        "envName": null,
+        "propertyName": "gremlin.server.protocol",
+        "defaultValue": "none",
+        "description": "Sets the AuthProperties.Property.PROTOCOL properties for authentication to Gremlin Server. Default = none",
+        "type": "string"
+      },
+      "gremlin.server.nioPoolSize": {
+        "envName": null,
+        "propertyName": "gremlin.server.nioPoolSize",
+        "defaultValue": "1",
+        "description": "Size of the pool for handling request/response operations. Default = available processors",
+        "type": "number"
+      },
+      "gremlin.server.workerPoolSize": {
+        "envName": null,
+        "propertyName": "gremlin.server.workerPoolSize",
+        "defaultValue": "2",
+        "description": "Size of the pool for handling background work. Default = available processors * 2",
+        "type": "number"
+      },
+      "gremlin.server.serializer.className": {
+        "envName": null,
+        "propertyName": "gremlin.server.serializer.className",
+        "defaultValue": "none",
+        "description": "The fully qualified class name of the MessageSerializer that will be used to communicate with the server. Note that the serializer configured on the client should be supported by the server configuration. Default = none",
+        "type": "string"
+      },
+      "gremlin.server.connectionPool.channelizer": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.channelizer",
+        "defaultValue": "org.apache.tinkerpop.gremlin.driver.Channelizer$WebSocketChannelizer",
+        "description": "The fully qualified classname of the client Channelizer that defines how to connect to the server. Default = org.apache.tinkerpop.gremlin.driver.Channelizer$WebSocketChannelizer",
+        "type": "string"
+      },
+      "gremlin.server.connectionPool.enableSsl": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.enableSsl",
+        "defaultValue": "false",
+        "description": "Determines if SSL should be enabled or not. If enabled on the server then it must be enabled on the client. Default = false",
+        "type": "boolean"
+      },
+      "gremlin.server.connectionPool.keepAliveInterval": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.keepAliveInterval",
+        "defaultValue": "1800000",
+        "description": "Length of time in milliseconds to wait on an idle connection before sending a keep-alive request. Set to zero to disable this feature. Default = 1800000",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.keyCertChainFile": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.keyCertChainFile",
+        "defaultValue": "none",
+        "description": "The X.509 certificate chain file in PEM format. Default = none",
+        "type": "string"
+      },
+      "gremlin.server.connectionPool.keyFile": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.keyFile",
+        "defaultValue": "none",
+        "description": "The PKCS#8 private key file in PEM format. Default = none",
+        "type": "string"
+      },
+      "gremlin.server.connectionPool.keyPassword": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.keyPassword",
+        "defaultValue": "none",
+        "description": "The password of the keyFile if it is password-protected. Default = none",
+        "type": "string"
+      },
+      "gremlin.server.connectionPool.maxContentLength": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.maxContentLength",
+        "defaultValue": "65536",
+        "description": "The maximum length in bytes that a message can be sent to the server. This number can be no greater than the setting of the same name in the server configuration. Default = 65536",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.maxInProcessPerConnection": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.maxContentLength",
+        "defaultValue": "4",
+        "description": "The maximum number of in-flight requests that can occur on a connection. Default = 4",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.maxSimultaneousUsagePerConnection": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.maxSimultaneousUsagePerConnection",
+        "defaultValue": "16",
+        "description": "The maximum number of times that a connection can be borrowed from the pool simultaneously. Default = 16",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.maxSize": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.maxSize",
+        "defaultValue": "8",
+        "description": "The maximum size of a connection pool for a host. Default = 8",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.maxWaitForConnection": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.maxWaitForConnection",
+        "defaultValue": "3000",
+        "description": "The amount of time in milliseconds to wait for a new connection before timing out. Default = 3000",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.maxWaitForSessionClose": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.maxWaitForSessionClose",
+        "defaultValue": "3000",
+        "description": "The amount of time in milliseconds to wait for a session to close before timing out (does not apply to sessionless connections). Default = 3000",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.minInProcessPerConnection": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.minInProcessPerConnection",
+        "defaultValue": "1",
+        "description": "The minimum number of in-flight requests that can occur on a connection. Default = 1",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.minSimultaneousUsagePerConnection": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.minSimultaneousUsagePerConnection",
+        "defaultValue": "8",
+        "description": "The maximum number of times that a connection can be borrowed from the pool simultaneously. Default = 8",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.minSize": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.minSize",
+        "defaultValue": "2",
+        "description": "The minimum size of a connection pool for a host. Default = 2",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.reconnectInterval": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.reconnectInterval",
+        "defaultValue": "1000",
+        "description": "The amount of time in milliseconds to wait before trying to reconnect to a dead host. Default = 1000",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.resultIterationBatchSize": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.resultIterationBatchSize",
+        "defaultValue": "64",
+        "description": "The override value for the size of the result batches to be returned from the server. Default = 64",
+        "type": "number"
+      },
+      "gremlin.server.connectionPool.trustCertChainFile": {
+        "envName": null,
+        "propertyName": "gremlin.server.connectionPool.trustCertChainFile",
+        "defaultValue": "none",
+        "description": "File location for a SSL Certificate Chain to use when SSL is enabled. If this value is not provided and SSL is enabled, the TrustManager will be established with a self-signed certificate which is NOT suitable for production purposes. Default = none",
+        "type": "string"
       }
     },
     "editor": {

@@ -14,11 +14,10 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.apache.zeppelin:zeppelin-interpreter:0.7.2")
-    compile("org.apache.tinkerpop:gremlin-core:3.3.0")
-    compile("org.apache.tinkerpop:gremlin-groovy:3.3.0")
-    compile("org.apache.tinkerpop:gremlin-python:3.3.0")
-    compile("org.apache.tinkerpop:gremlin-driver:3.3.0")
-    compile("io.vavr:vavr:0.9.0")
+    compile("org.apache.zeppelin:zeppelin-interpreter:0.9.0")
+    compile("org.apache.tinkerpop:gremlin-core:3.4.10")
+    compile("org.apache.tinkerpop:gremlin-groovy:3.4.10")
+    compile("org.apache.tinkerpop:gremlin-driver:3.4.10")
+    compile("io.vavr:vavr:0.10.3")
     testCompile("junit:junit:4.12")
 }
